@@ -24,16 +24,16 @@ ami-nginx = "ami-0aec557c1a3f22c36"
 
 ami-sonar = "ami-0ed900146b7d678b6"
 
-keypair = "devops"
+keypair = "newoluwatosin"
+
+account_no = "905846106539"
 
 master-password = "devopspblproject"
 
-master-username = "david"
-
-account_no = "696742900004"
+master-username = "oluwatosin"
 
 tags = {
-  Owner-Email     = "infradev-segun@darey.io"
+  Owner-Email     = "tosinaws83@gmail.com"
   Managed-By      = "Terraform"
-  Billing-Account = "696742900004"
+  Billing-Account = "905846106539"
 }

@@ -1,7 +1,7 @@
 # The entire section create a certificate, public zone, and validate the certificate using DNS method
 
 # Create the certificate using a wildcard for all the domains created in awsbukola.fun
-resource "aws_acm_certificate" "awsbukola" {
+resource "aws_acm_certificate" "project_19_cert" {
   domain_name       = "*awsbukola.fun"
   validation_method = "DNS"
 }
