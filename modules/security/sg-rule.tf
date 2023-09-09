@@ -7,12 +7,49 @@ resource "aws_security_group_rule" "inbound-alb-http" {
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.ACS["ext-alb-sg"].id
 }
- 
 
 resource "aws_security_group_rule" "inbound-alb-https" {
   from_port         = 443
   protocol          = "tcp"
   to_port           = 443
+  type              = "ingress"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.ACS["ext-alb-sg"].id
+}
+
+
+# security group for compute module
+resource "aws_security_group_rule" "inbound-bastion-ssh-compute" {
+  from_port         = 22
+  protocol          = "tcp"
+  to_port           = 22
+  type              = "ingress"
+  source_security_group_id = aws_security_group.ACS["bastion-sg"].id
+  security_group_id = aws_security_group.ACS["compute-sg"].id
+}
+
+resource "aws_security_group_rule" "inbound-port-artifcatory" {
+  from_port         = 8081
+  protocol          = "tcp"
+  to_port           = 8081
+  type              = "ingress"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.ACS["compute-sg"].id
+}
+
+resource "aws_security_group_rule" "inbound-port-jenkins" {
+  from_port         = 8080
+  protocol          = "tcp"
+  to_port           = 8080
+  type              = "ingress"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.ACS["compute-sg"].id
+}
+
+resource "aws_security_group_rule" "inbound-port-sonarqube" {
+  from_port         = 9000
+  protocol          = "tcp"
+  to_port           = 9000
   type              = "ingress"
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.ACS["ext-alb-sg"].id
@@ -31,7 +68,7 @@ resource "aws_security_group_rule" "inbound-ssh-bastion" {
 
 # security group for nginx reverse proxy, to allow access only from the extaernal load balancer and bastion instance
 
-resource "aws_security_group_rule" "inbound-nginx-https" {
+resource "aws_security_group_rule" "inbound-nginx-http" {
   type                     = "ingress"
   from_port                = 443
   to_port                  = 443
@@ -114,3 +151,7 @@ resource "aws_security_group_rule" "inbound-mysql-webserver" {
   source_security_group_id = aws_security_group.ACS["webserver-sg"].id
   security_group_id        = aws_security_group.ACS["datalayer-sg"].id
 }
+
+
+
+
