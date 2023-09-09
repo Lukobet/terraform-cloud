@@ -15,11 +15,11 @@ variable "enable_dns_hostnames" {
 }
 
 variable "enable_classiclink" {
-  default = "false"
+  default = "true"
 }
 
 variable "enable_classiclink_dns_support" {
-  default = "false"
+  default = "true"
 }
 
 variable "preferred_number_of_public_subnets" {
