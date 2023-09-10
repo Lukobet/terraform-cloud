@@ -1,6 +1,7 @@
 # create key from key management system
-resource "aws_kms_key" "AcS-kms" {
-  description = "KMS key "
+resource "aws_kms_key" "a" {
+  description             = "KMS key 1"
+  deletion_window_in_days = 10
   policy      = <<EOF
   {
   "Version": "2012-10-17",
@@ -21,13 +22,13 @@ EOF
 # create key alias
 resource "aws_kms_alias" "alias" {
   name          = "alias/kms"
-  target_key_id = aws_kms_key.AcS-kms.key_id
+  target_key_id = aws_kms_key.a.key_id
 }
 
 # create Elastic file system
 resource "aws_efs_file_system" "ACS-efs" {
   encrypted  = true
-  kms_key_id = aws_kms_key.AcS-kms.arn
+  kms_key_id = aws_kms_key.a.arn
 
 tags = merge(
     var.tags,

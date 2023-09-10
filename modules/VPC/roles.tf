@@ -74,8 +74,8 @@ resource "aws_iam_role_policy_attachment" "test-attach" {
   policy_arn = aws_iam_policy.policy.arn
 }
 
-resource "aws_iam_instance_profile" "ip" {
-  name = "aws_instance_profile_test"
+resource "aws_iam_instance_profile" "test_profile" {
+  name = "test_profile"
   role = aws_iam_role.test_role.name
 }
 
