@@ -1,6 +1,6 @@
 # create DB subnet group from the private subnets
-resource "aws_db_subnet_group" "AcS-rds" {
-  name       = "AcS-rds"
+resource "aws_db_subnet_group" "acs-rds" {
+  name       = "acs-rds"
   subnet_ids = var.private_subnets
 
   tags = merge(
@@ -21,7 +21,7 @@ resource "aws_db_instance" "ACS-rds" {
   username               = var.db-username
   password               = var.db-password
   parameter_group_name   = "default.mysql5.7"
-  db_subnet_group_name   = aws_db_subnet_group.AcS-rds.name
+  db_subnet_group_name   = aws_db_subnet_group.acs-rds.name
   skip_final_snapshot    = true
   vpc_security_group_ids = var.db-sg
   multi_az               = "true"
